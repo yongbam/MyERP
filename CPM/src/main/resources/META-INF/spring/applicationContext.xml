@@ -2,15 +2,24 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-        <bean id="controller"
-                class="com.myapp.erp.ManageCtrl">
-                <property name="manageService" ref="service" />
+        <bean id="connController" class="com.myapp.erp.conn.ConnCtrlImpl">
         </bean>
-
-        <bean id="service"
-                class="com.myapp.erp.ManageSrv">
-                <property name="manageDao" ref="dao" />
+        
+        <bean id="person" class="com.myapp.erp.user.Person">
         </bean>
-
-        <bean id="dao" class="com.myapp.erp.ManageDao" />
+        <bean id="user" class="com.myapp.erp.user.User" parent="person">
+        </bean>
+        
+        <bean id="manageController" class="com.myapp.erp.manage.ManageCtrlImpl">
+        </bean>
+        
+        <bean id="LimManCtrl" class="com.myapp.erp.manage.limited.LimitedCtrl">
+            <property name="srv" ref="LimManSrv"></property>
+        </bean>
+        <bean id="LimManSrv" class="com.myapp.erp.manage.limited.LimitedSrv">
+            <property name="dao" ref="LimManDao"></property>
+        </bean>
+        <bean id="LimManDao" class="com.myapp.erp.manage.limited.LimitedDao">
+        </bean>
+        
 </beans>

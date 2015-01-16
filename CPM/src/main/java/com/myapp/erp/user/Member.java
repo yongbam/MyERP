@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.myapp.erp;
+package com.myapp.erp.user;
 
 /**
  *
  * @author yongbam
  */
-class ManageDetails {
+public class Member extends Ticket{
 
-    public ManageDetails(String kim, String yongbamgmailcom) {
+    public Member(String Type) {
+        super(Type);
     }
     
 }
