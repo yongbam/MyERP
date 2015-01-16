@@ -5,10 +5,14 @@
  */
 package com.myapp.erp.manage;
 
+import com.myapp.erp.user.Member;
+
 /**
  *
  * @author yongbam
  */
-public class ManageFactory {
-    
+public interface ManageSrv {
+    public void Input(Member member);
+    public void run();
+    public void show();
 }

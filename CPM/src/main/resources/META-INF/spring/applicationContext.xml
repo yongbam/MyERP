@@ -2,24 +2,34 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-        <bean id="connController" class="com.myapp.erp.conn.ConnCtrlImpl">
+        <bean id="ConnCtrl" class="com.myapp.erp.conn.ConnCtrl">
+            <property name="connSrv" ref="ConnServiceImpl"></property>
         </bean>
+        <bean id="ConnServiceImpl" class="com.myapp.erp.conn.AuthConnSrv">
+            <property name="connDao" ref="ConnDao"></property>
+        </bean>
+        <bean id="ConnDao" class="com.myapp.erp.conn.ConnDao"></bean>
         
         <bean id="person" class="com.myapp.erp.user.Person">
         </bean>
         <bean id="user" class="com.myapp.erp.user.User" parent="person">
         </bean>
-        
-        <bean id="manageController" class="com.myapp.erp.manage.ManageCtrlImpl">
+        <bean id="Member" class="com.myapp.erp.user.Member" parent="person">
+            <constructor-arg index="0" value="Limited" />
         </bean>
         
-        <bean id="LimManCtrl" class="com.myapp.erp.manage.limited.LimitedCtrl">
-            <property name="srv" ref="LimManSrv"></property>
+        <bean id="ManageController" class="com.myapp.erp.manage.ManageCtrl" >
+            <property name="manageSrv" ref="ManageService"></property>
+            <property name="factory" ref="ServiceFactory"></property>
         </bean>
-        <bean id="LimManSrv" class="com.myapp.erp.manage.limited.LimitedSrv">
-            <property name="dao" ref="LimManDao"></property>
+        <bean id="ManageService" factory-bean="ServiceFactory" factory-method="show">
+            <constructor-arg index="0" ref="Member"/>
         </bean>
-        <bean id="LimManDao" class="com.myapp.erp.manage.limited.LimitedDao">
+        <bean id="ServiceFactory" class="com.myapp.erp.manage.ManageSrvFactory">
+            
+        </bean>
+        <bean id="ManageDao" class="com.myapp.erp.manage.ManageDao">
+            
         </bean>
         
 </beans>

@@ -14,5 +14,9 @@ public class Member extends Ticket{
     public Member(String Type) {
         super(Type);
     }
+
+    public String getType() {
+        return Type;
+    }
     
 }

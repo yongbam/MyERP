@@ -5,39 +5,31 @@
  */
 package com.myapp.erp.conn;
 
+import com.myapp.erp.user.Member;
+import com.myapp.erp.user.User;
+
 /**
  *
  * @author yongbam
  */
 public class ConnCtrl {
-    private String Id;
-    private String Pass;
-    private boolean IsRemember;
-    private Integer Type;
+    private AuthConnSrv connSrv;
 
-    public String getId() {
-        return Id;
+    public ConnCtrl() {
     }
 
-    public void setId(String Id) {
-        this.Id = Id;
-    }
-
-    public String getPass() {
-        return Pass;
-    }
-
-    public void setPass(String Pass) {
-        this.Pass = Pass;
-    }
-
-    public boolean isIsRemember() {
-        return IsRemember;
-    }
-
-    public void setIsRemember(boolean IsRemember) {
-        this.IsRemember = IsRemember;
-    }
     
+    public Member login(User user) {
+        return connSrv.login(user);
+        
+    }
+
+    public AuthConnSrv getConnSrv() {
+        return connSrv;
+    }
+
+    public void setConnSrv(AuthConnSrv connSrv) {
+        this.connSrv = connSrv;
+    }
     
 }

@@ -8,17 +8,27 @@ package com.myapp.erp.conn;
 import com.myapp.erp.user.LimitedMember;
 import com.myapp.erp.user.Member;
 import com.myapp.erp.user.Person;
-import java.util.ArrayList;
-import ybk.db.ConnBuilder;
-import ybk.db.ConnSrvImpl;
-import ybk.db.MyResultSet;
-import ybk.db.Param;
+
 
 /**
  *
  * @author yongbam
  */
-public class AuthConnCtrl extends ConnCtrl implements ConnCtrlImpl{
+public class AuthConnSrv extends ConnSrv implements ConnSrvImpl{
+    private ConnDao connDao;    
+
+    public ConnDao getConnDao() {
+        return connDao;
+    }
+
+    public void setConnDao(ConnDao connDao) {
+        this.connDao = connDao;
+    }
+    
+    public AuthConnSrv() {
+    }
+    
+    
     @Override
     public void abort() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -36,20 +46,12 @@ public class AuthConnCtrl extends ConnCtrl implements ConnCtrlImpl{
             this.setPass(person.getPass());
 //        }
         
-        ConnSrvImpl cs = new ConnBuilder().Port(27011).DefaultSchema("mydata").Build("MongoDB");
-        
-        ArrayList<Param> list = new ArrayList<Param>();
-        list.add(new Param("id", getId() ));
-        list.add(new Param("Pass", getPass() ));
-        
-        Param p = new Param("id", getId());
-        MyResultSet mrs = cs.Query("member", list );
-        if(!mrs.IsEmpty() ){
+        if( connDao.check(Id, Pass)){
             return new LimitedMember(getId()+"-"+"Limited");
         }
         
         return null;
         
     }
-    
+
 }

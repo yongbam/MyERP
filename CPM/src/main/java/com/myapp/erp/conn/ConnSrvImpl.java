@@ -12,7 +12,7 @@ import com.myapp.erp.user.Person;
  *
  * @author yongbam
  */
-public interface ConnCtrlImpl {
+public interface ConnSrvImpl {
     public void abort();
     public void rememberMe();
     public Member login(Person person);

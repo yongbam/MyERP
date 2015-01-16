@@ -1,12 +1,11 @@
 package com.myapp.erp;
 
 
-import com.myapp.erp.conn.ConnCtrlImpl;
-import com.myapp.erp.manage.ManageCtrlImpl;
+import com.myapp.erp.conn.ConnCtrl;
+import com.myapp.erp.manage.ManageCtrl;
 import com.myapp.erp.user.Member;
-import com.myapp.erp.user.Person;
-import com.myapp.erp.user.MemberCtrlImpl;
 import com.myapp.erp.user.User;
+import java.util.Scanner;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -34,24 +33,20 @@ public class MainApp {
                 new ClassPathXmlApplicationContext("classpath:META-INF/spring/applicationContext.xml");
         // Input check type and input Id and Pass
         User  user = new User();
-        user.Input("Kim", "yongbam", "1234", "user");
-        ConnCtrlImpl connCtrl = (ConnCtrlImpl) context.getBean("connController");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Input name");
+        String name = sc.nextLine();
+        user.Input(name, "yongbam", "1234", "user");
+        // Log In
+        ConnCtrl connCtrl = (ConnCtrl) context.getBean("ConnCtrl");
         Member member = connCtrl.login(user);
-        ManageCtrlImpl manageCtrl = (ManageCtrlImpl) context.getBean("manageController");
+        if( member == null ){
+            System.out.println("Log in failed");
+            return;
+        }
+        // Manage
+        ManageCtrl manageCtrl = (ManageCtrl) context.getBean("ManageController");
+        manageCtrl.show(member);
         
-    }
-    
-    public static void submitStartTime(){
-        
-    }
-    public static void submitWorkEndTIme(String memo){
-        
-    }
-    public static void submitEndTime(){
-        
-    }
-    public static void seeReport(){
-        
-    }
-    
+    }    
 }

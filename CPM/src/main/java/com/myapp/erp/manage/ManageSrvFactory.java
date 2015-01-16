@@ -11,7 +11,14 @@ import com.myapp.erp.user.Member;
  *
  * @author yongbam
  */
-public interface ManageCtrlImpl {
-    public void Input(Member member);
-    public void run();
+public class ManageSrvFactory {
+    public ManageSrv show(Member member){
+        if(member.getType().contains("Limited")){
+            return new LimitedSrvImpl();
+        }
+        else{
+            return null;
+        }
+        
+    }
 }
