@@ -15,6 +15,10 @@ public class Person {
     protected String Pass;
     protected String Type;
 
+    public Person() {
+    }
+
+    
     public String getName() {
         return Name;
     }
